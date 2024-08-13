@@ -18,7 +18,7 @@ enableGitInfo = true
 
 # You can add your own taxonomies
 [taxonomies]
-tag = "developer tools ci github gitlab"
+tag = "developer tools ci github gitlab tekton k8s hil"
 category = "categories"
 
 [params.taxonomy]
@@ -112,9 +112,9 @@ version = "0.0"
 url_latest_version = "https://jumpstarter.dev"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/jumpstarter-dev/jumpstarter"
+github_repo = "https://github.com/jumpstarter-dev/website"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/jumpstarter-dev/jumpstarter"
+github_project_repo = "https://github.com/jumpstarter-dev/"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = "website"
@@ -168,18 +168,53 @@ enable = false
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
+
 [[params.links.user]]
-  name = "Hardware design"
-  url = "https://github.com/jumpstarter-dev/dutlink-board/"
-  icon = "fa fa-microchip"
-  desc = "The hardware design of the DUTlink board"
+  name = "Driver API Reference"
+  url = "https://docs.jumpstarter.dev/reference.html"
+  icon = "fab fa-hardware"
+  desc = "The main python repository"
+
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
-  name = "GitHub"
+  name = "Community Matrix Chat"
+  url = "https://matrix.to/#/#jumpstarter:matrix.org"
+  icon = "fa-regular fa-comments"
+  desc = "The community chat"
+
+[[params.links.developer]]
+  name = "Weekly meeting"
+  url = "https://meet.google.com/gzd-hhbd-hpu"
+  icon = "fa-regular fa-calendar"
+  desc = "The weekly meeting, every Thursday, 16:00 to 17:00 CEST"
+
+[[params.links.user]]
+  name = "jumpstarter-dev/jumpstarter"
   url = "https://github.com/jumpstarter-dev/jumpstarter"
   icon = "fab fa-github"
-  desc = "Development takes place here!"
+  desc = "The main python repository"
+[[params.links.user]]
+  name = "jumpstarter-dev/jumpstarter-controller"
+  url = "https://github.com/jumpstarter-dev/jumpstarter-controller"
+  icon = "fab fa-github"
+  desc = "The go controller that runs in Kubernetes"
+[[params.links.user]]
+  name = "jumpstarter-dev/jumpstarter-protocol"
+  url = "https://github.com/jumpstarter-dev/jumpstarter-protocol"
+  icon = "fab fa-github"
+  desc = "The protobuf protocol used between the service, the client and the client"
 
+[[params.links.user]]
+  name = "DUTLink board"
+  url = "https://github.com/jumpstarter-dev/dutlink-board/"
+  icon = "fa fa-microchip"
+  desc = "An optional test harness for testing SOCs"
+
+[[params.links.user]]
+  name = "DUTLink board firmware"
+  url = "https://github.com/jumpstarter-dev/dutlink-board/"
+  icon = "fa-brands fa-rust"
+  desc = "The firmware for the DUTLink board"
 # hugo module configuration
 
 [module]

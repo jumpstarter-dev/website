@@ -33,14 +33,11 @@ In a modern development cycle we want to know that our software changes work wel
 * I have **multiple variants of the hardware where my software needs to run**, and I want to test them all.
 * I want a **hands-free operation** of hardware in my **development environment**, i.e. I don't want to manually flash images, reboot the DUT, insert usb sticks,
   manually interact with a bootloader, etc.
+* I want to create a lab where developers can **test their software in real hardware**.
 
-* **What is it good for?**: Integrating your hardware edge devices into your software CI/CD pipeline.
+* **What is it good for?**: Integrating your hardware edge devices into your software CI/CD pipeline. Creating a distributed lab for your developers to test their software in real hardware.
 
 * **What is it not good for?**: Managing edge devices. Jumpstarter is not a device management tool, it is a testing tool.
-
-* **What is it *not yet* good for?**: Measuring power consumption of your device in combination with your software. This is a feature that we are working on.
-  This feature will enable you to get a power consumption report of your device in combination with your software, and will allow you to compare power consumption
-  before and after your changes.
 
 ## Where should I go next?
 

@@ -2,7 +2,7 @@
 title: Jumpstarter
 ---
 
-{{< blocks/cover title="Welcome to the jumpstarter project" image_anchor="top" height="full" >}}
+{{< blocks/cover title="Welcome to the Jumpstarter project" image_anchor="top" height="full" >}}
 
 <img class="front-logo" src="jumpstarter.svg"/>
 
@@ -13,9 +13,7 @@ title: Jumpstarter
   Download <i class="fab fa-github ms-2 "></i>
 </a>
 
-<img class="front-console" src="jumpstarter-console2.png">
-
-<p class="lead mt-5"><h2>Enabling Hardware in the Loop for Edge devices &mdash; in the datacenter, lab and development environment!</h2></p>
+<p class="lead mt-5"><h2>Enabling Cloud Native Hardware in the Loop for Edge devices &mdash; in the datacenter, lab and development environment!</h2></p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}
 
@@ -29,30 +27,39 @@ software for edge devices has been a challenge, in many cases <b>emulators for t
 Jumpstarter helps you test your software in the real hardware, and <b>eliminates the need for manual
 test operations</b>.
 
-Jumpstarter is a <b>free and open source</b> project, and is <b>currently developed</b> by <a href="https://next.redhat.com">Red Hat ET</a>.
+This is a <b>free and open source</b> project, <b>currently being developed</b> by <a href="https://github.com/NickCao">Nick Cao</a> and <a href="https://github.com/mangelajo">Miguel Ángel Ajo</a> from <a href="https://next.redhat.com">Red Hat ET</a> and <a href="https://github.com/kirkbrauer">Kirk Brauer</a> from <a href="https://hatci.com">Hyundai America Technical Center.</a>
 
 {{% /blocks/lead %}}
 
 
 {{% blocks/section color="dark" type="row" %}}
 {{% blocks/feature icon="fa-robot" title="Automate testing" %}}
-The jumpstarter scripting language will enable you to interact with the hardware in your test environment:
-power, reset, image flashing, serial console interaction, and more.
+Jumpstarter lets you test your hardware with the power of
+<div><i class="fa-brands fa-python"></i> Python</div>
+
+You can use simple
+Python scripts, but you can also write regular python tests with your favorite
+testing framework.
 
 {{% /blocks/feature %}}
 
 
 {{% blocks/feature icon="fab fa-github" title="Contributions welcome!"  %}}
-We do a [Pull Request](https://github.com/jumpstarter-dev/jumpstarter/pulls) contributions workflow on **GitHub**. New users are always welcome!
+ All our source code is hosted in the jumpstarter-dev organization on
+ [GitHub](https://github.com/jumpstarter-dev/) contributions are welcome, and you
+ can also join our [Community](/community/)
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fa fa-microchip" title="Open Hardware included" url="https://github.com/jumpstarter-dev/dutlink-board" %}}
-The jumpstarter project works with the dutlink-board, a small board that can be used to control the power and storage
-of your device under test.
+{{% blocks/feature icon="fa fa-microchip" title="Test harnesses / interfaces" url="https://github.com/jumpstarter-dev/dutlink-board" %}}
+The Jumpstarter project provides a set of drivers to build your perfect test harness,
+we aim to support a wide range of hardware and interfaces.
 
-But it is designed to allow other harware to work with the jumpstarter stack via a driver design.
+You can use a Raspberry Pi as your test harness, or you can use other SBCs or
+comercially available test harnesses.
 
+We also created a USB based test harness, the [DUTLink board](https://github.com/jumpstarter-dev/dutlink-board) which provides storage/power/console/gpio control
+over an SBC. Jumpstarter provides a driver for the DUTLink board.
 {{% /blocks/feature %}}
 
 
