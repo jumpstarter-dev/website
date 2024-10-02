@@ -6,15 +6,4 @@ tags: [test, docs]
 weight: 3
 ---
 
-## Installation
-
-{{< highlight bash  >}}
-
-...
-
-{{< / highlight >}}
-
-## Setup
-
-## Hello World
-
+This section covers the basics of getting started with jumpstarter
