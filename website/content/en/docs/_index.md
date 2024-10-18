@@ -11,7 +11,8 @@ You are at the right place to learn about the Jumpstarter project!
 
 ## What is Jumpstarter?
 
-Jumpstarter is a project to enable **Hardware in the Loop** testing and development for Edge devices.
+Jumpstarter is a project to provide a cloud native **Hardware in the Loop** testing and development
+environment for Edge and Embedded firmware based devices.
 <div style="text-align:center; width:70%">
 <img style="width:30em" src="pipeline.svg"/>
 <br/>
