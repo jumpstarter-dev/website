@@ -1,6 +1,6 @@
 ---
 title: Managing Clients
-weight: 20
+weight: 30
 description: >
   This section explains how to use the `jmpctl` CLI to create clients and manage them.
 ---
