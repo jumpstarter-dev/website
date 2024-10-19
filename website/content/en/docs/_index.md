@@ -1,13 +1,24 @@
 ---
 title: Documentation Overview
-linkTitle: Docs
+linkTitle: Overview
 menu: {main: {weight: 20}}
 weight: 20
 ---
 
 {{% pageinfo %}}
-You are at the right place to learn about the Jumpstarter project!
+Jumpstarter documentation is divided in two parts:
+
+* This website: provides an overview of the project, architecture,
+  install instructions for the distributed services, and getting started guides.
+
+* [docs.jumpstarter.dev](https://docs.jumpstarter.dev) provides detailed documentation
+  about the Jumpstarter Python client, exporter, driver models and pluggability.
+
+Please refer to [our glossary](https://docs.jumpstarter.dev/glossary.html) for a
+better understanding of the terms used on both websites.
 {{% /pageinfo %}}
+
+
 
 ## What is Jumpstarter?
 
@@ -41,6 +52,3 @@ In a modern development cycle we want to know that our software changes work wel
 * **What is it not good for?**: Managing edge devices. Jumpstarter is not a device management tool, it is a testing and development tool.
 
 ## Where should I go next?
-
-* [Getting Started](/docs/Getting%20started/)
-

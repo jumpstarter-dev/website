@@ -1,15 +1,17 @@
 ---
-title: Installation
+title: Service Installation
 weight: 1
 description: >
-  This section contains the installation instructions for the Jumpstarter distributed service, and the python framework.
+  This section contains the installation instructions for the Jumpstarter distributed service.
 ---
-
-## Installing the distributed service
 
 When building a distributed environment with Jumpstarter, you will need to install the Jumpstarter distributed service. This service is responsible for managing the devices, and the communication between the devices and and clients.
 
-You will need an OpenShift or Kubernetes deployment, and the right kubeconfig file with admin credentials. Alternatively you can setup a local Kubernetes cluster with [kind](https://kind.sigs.k8s.io/) following the instructions below.
+You will need an OpenShift or Kubernetes deployment, and the right kubeconfig file with admin
+ credentials (at least the first install may need assistance from your cluster administrator
+ for the purpose of installing the service CRDs).
+
+Alternatively you can setup a local Kubernetes cluster with [kind](https://kind.sigs.k8s.io/) (kubernetes in docker) following the instructions below.
 
 {{% alert title="Note" color="info" %}}
 The direct helm install will auto-generate random router and controller secrets, but if you use ArgoCD make sure to set these values to unique values.
@@ -33,7 +35,7 @@ The direct helm install will auto-generate random router and controller secrets,
               --set global.baseDomain=jumpstarter.example.com \
               --set global.metrics.enabled=true \
               --set jumpstarter-controller.grpc.mode=route \
-              --version=0.0.4-24-g1a8a159
+              --version=0.1.0
       {{< / highlight >}}
     {{< /tab >}}
 
@@ -44,7 +46,7 @@ helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarte
             --set global.baseDomain=devel.jumpstarter.dev \
             --set global.metrics.enabled=true # disable if metrics not available \
             --set jumpstarter-controller.grpc.mode=ingress \
-            --version=0.0.4-24-g1a8a159
+            --version=0.1.0
         {{< / highlight >}}
     {{< /tab >}}
 
@@ -103,7 +105,8 @@ helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarte
             --set jumpstarter-controller.grpc.routerEndpoint=${GRPC_ROUTER_ENDPOINT} \
             --set global.metrics.enabled=false \
             --set jumpstarter-controller.grpc.nodeport.enabled=true \
-            --version=0.0.4-24-g1a8a159
+            --set jumpstarter-controller.grpc.mode=nodeport \
+            --version=0.1.0
         {{< / highlight >}}
     {{< /tab >}}
 
@@ -153,7 +156,7 @@ spec:
       - name: jumpstarter-controller.grpc.mode
         value: "route"
     repoURL: quay.io/jumpstarter-dev/helm
-    targetRevision: "0.0.4-24-g1a8a159"
+    targetRevision: "0.1.0"
 {{< / highlight >}}
 
 <h3>Note: CRDs</h3>
