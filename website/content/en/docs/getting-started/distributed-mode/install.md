@@ -1,13 +1,17 @@
 ---
-title: Installation
+title: Service Installation
 weight: 1
 description: >
-  This section contains the installation instructions for the Jumpstarter distributed service, and the python framework.
+  This section contains the installation instructions for the Jumpstarter distributed service.
 ---
 
-## Installing the distributed service
-
 When building a distributed environment with Jumpstarter, you will need to install the Jumpstarter distributed service. This service is responsible for managing the devices, and the communication between the devices and and clients.
+
+You will need an OpenShift or Kubernetes deployment, and the right kubeconfig file with admin
+ credentials (at least the first install may need assistance from your cluster administrator
+ for the purpose of installing the service CRDs).
+
+Alternatively you can setup a local Kubernetes cluster with [kind](https://kind.sigs.k8s.io/) (kubernetes in docker) following the instructions below.
 
 {{% alert title="Note" color="info" %}}
 The direct helm install will auto-generate random router and controller secrets, but if you use ArgoCD make sure to set these values to unique values.
@@ -16,30 +20,96 @@ The direct helm install will auto-generate random router and controller secrets,
 
 {{< tabpane text=true right=false >}}
     {{% tab header="**Methods**:" disabled=true /%}}
-    {{< tab header="**Helm with OpenShift**" >}}
+    {{< tab header="**OpenShift**" >}}
 
-        {{< highlight bash  >}}
-kind create cluster
-helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarter \
-            --create-namespace --namespace jumpstarter-lab \
-            --set global.baseDomain=devel.jumpstarter.dev \
-            --set global.metrics.enabled=true \
-            --set jumpstarter-controller.grpc.mode=route \
-            --version=0.0.4-24-g1a8a159
-        {{< / highlight >}}
+      Please note that the global.baseDomain is used to create the host names for the services,
+      with the provided example the services will be available at grpc.jumpstarter.example.com
+      and router.jumpstarter.example.com.
+      <br/><br/>
+      To install using helm:
+
+      <br/>
+      {{< highlight bash  >}}
+  helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarter \
+              --create-namespace --namespace jumpstarter-lab \
+              --set global.baseDomain=jumpstarter.example.com \
+              --set global.metrics.enabled=true \
+              --set jumpstarter-controller.grpc.mode=route \
+              --version=0.1.0
+      {{< / highlight >}}
     {{< /tab >}}
-        {{< tab header="**Helm with Kubernetes**" >}}
 
+    {{< tab header="**Kubernetes**" >}}
         {{< highlight bash  >}}
-kind create cluster
 helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarter \
             --create-namespace --namespace jumpstarter-lab \
             --set global.baseDomain=devel.jumpstarter.dev \
             --set global.metrics.enabled=true # disable if metrics not available \
             --set jumpstarter-controller.grpc.mode=ingress \
-            --version=0.0.4-24-g1a8a159
+            --version=0.1.0
         {{< / highlight >}}
     {{< /tab >}}
+
+    {{< tab header="**Kind**" >}}
+    Kind is a tool for running local Kubernetes clusters using Podman or Docker container “nodes”.
+    <br/><br/>
+    Begin by figuring out the LAN ip address that it's accessible for your docker/podman host, and do:
+    {{< highlight bash >}}
+export IP="LAN accessible address to your docker/podman instance"
+    {{< / highlight >}}
+    <br/><br/>
+    Then you can continue with:
+    {{< highlight bash  >}}
+
+cat <<EOF > kind_config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+kubeadmConfigPatches:
+- |
+  kind: ClusterConfiguration
+  apiServer:
+    extraArgs:
+      "service-node-port-range": "3000-32767"
+- |
+  kind: InitConfiguration
+  nodeRegistration:
+    kubeletExtraArgs:
+      node-labels: "ingress-ready=true"
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 80 # ingress controller
+    hostPort: 5080
+    protocol: TCP
+  - containerPort: 30010 # grpc nodeport
+    hostPort: 8082
+    protocol: TCP
+  - containerPort: 30011 # grpc router nodeport
+    hostPort: 8083
+    protocol: TCP
+  - containerPort: 443 # minimalistic UI
+    hostPort: 5443
+    protocol: TCP
+EOF
+
+export BASEDOMAIN="jumpstarter.${IP}.nip.io"
+export GRPC_ENDPOINT="grpc.${BASEDOMAIN}:8082"
+export GRPC_ROUTER_ENDPOINT="router.${BASEDOMAIN}:8083"
+
+kind create cluster  --config kind_config.yaml
+
+helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarter \
+            --create-namespace --namespace jumpstarter-lab \
+            --set global.baseDomain=${BASEDOMAIN} \
+            --set jumpstarter-controller.grpc.endpoint=${GRPC_ENDPOINT} \
+            --set jumpstarter-controller.grpc.routerEndpoint=${GRPC_ROUTER_ENDPOINT} \
+            --set global.metrics.enabled=false \
+            --set jumpstarter-controller.grpc.nodeport.enabled=true \
+            --set jumpstarter-controller.grpc.mode=nodeport \
+            --version=0.1.0
+        {{< / highlight >}}
+    {{< /tab >}}
+
     {{< tab header="**ArgoCD in OpenShift**" >}}
         <h3>Create namespace</h3>
         First, we must create a namespace for the Jumpstarter installation. This namespace
@@ -86,7 +156,7 @@ spec:
       - name: jumpstarter-controller.grpc.mode
         value: "route"
     repoURL: quay.io/jumpstarter-dev/helm
-    targetRevision: "0.0.4-24-g1a8a159"
+    targetRevision: "0.1.0"
 {{< / highlight >}}
 
 <h3>Note: CRDs</h3>
@@ -128,19 +198,6 @@ subjects:
   namespace: openshift-gitops
 {{< / highlight >}}
 
-    {{< /tab >}}
-
-        {{< tab header="**Helm in kind**" >}}
-    Kind is a tool for running local Kubernetes clusters using Podman or Docker container “nodes”.
-        {{< highlight bash  >}}
-kind create cluster
-helm upgrade jumpstarter --install oci://quay.io/jumpstarter-dev/helm/jumpstarter \
-            --create-namespace --namespace jumpstarter-lab \
-            --set global.baseDomain=devel.jumpstarter.dev \
-            --set global.metrics.enabled=false \
-            --set jumpstarter-controller.grpc.mode=ingress \
-            --version=0.0.4-24-g1a8a159
-        {{< / highlight >}}
     {{< /tab >}}
 {{< /tabpane >}}
 
