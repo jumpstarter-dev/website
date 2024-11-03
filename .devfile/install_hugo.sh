@@ -20,7 +20,7 @@ esac
 URL=$(curl https://api.github.com/repos/gohugoio/hugo/releases/latest -s | \
   jq -r ".assets[] | select(.name | test(\"linux\")) | .browser_download_url" | \
   grep .tar.gz | \
-  grep -v extended | \
+  grep extended | \
   grep "${ARCH}")
 
 echo $URL
