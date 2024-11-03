@@ -1,0 +1,19 @@
+FROM quay.io/devfile/base-developer-image:ubi9-latest
+LABEL maintainer="jumpstarter.dev"
+
+LABEL name="devfile/udi9/jumpstarter-website"
+
+#labels for container catalog
+LABEL summary="devfile jumpstarter website developer image"
+LABEL description="Devspaces image for maintaining the website"
+LABEL io.k8s.display-name="jumpstarter-website-developer"
+
+
+# Install required packages
+USER root
+RUN dnf install -y nodejs npm git golang jq && dnf clean all
+COPY .devfile/install_hugo.sh /tmp/install_hugo.sh
+RUN /tmp/install_hugo.sh
+
+USER 10001
+
