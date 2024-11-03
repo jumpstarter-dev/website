@@ -25,4 +25,4 @@ commands:
   - id: serve-website
     exec:
       component: runtime
-      commandLine: "cd website && hugo serve"
+      commandLine: "cd website && hugo serve --bind 0.0.0.0"
