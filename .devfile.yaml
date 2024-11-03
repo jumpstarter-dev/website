@@ -1,0 +1,28 @@
+schemaVersion: 2.3.0
+metadata:
+  name: jumpstarter-website-dev
+  icon: https://jumpstarter.dev/jumpstarter.svg
+  tags:
+    - hugo
+    - website
+  language: Python
+projects:
+  - name: jumpstarter
+    git:
+      remotes:
+        origin: https://github.com/jumpstarter-dev/website.git
+components:
+   - name: runtime
+     container:
+       image: quay.io/jumpstarter-dev/jumpstarter-website-devspace:latest
+       endpoints:
+         - name: website
+           targetPort: 1313
+           protocol: http
+       mountSources: true
+
+commands:
+  - id: serve-website
+    exec:
+      component: runtime
+      commandLine: hugo serve
