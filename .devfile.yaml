@@ -15,10 +15,6 @@ components:
    - name: runtime
      container:
        image: quay.io/jumpstarter-dev/jumpstarter-website-devspace:latest
-       endpoints:
-         - name: website
-           targetPort: 1313
-           protocol: http
        mountSources: true
 
 commands:
