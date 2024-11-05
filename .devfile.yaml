@@ -16,6 +16,10 @@ components:
      container:
        image: quay.io/jumpstarter-dev/jumpstarter-website-devspace:latest
        mountSources: true
+       memoryRequest: 1G
+       memoryLimit: 4G
+       cpuRequest: '1'
+       cpuLimit: '2'
 
 commands:
   - id: serve-website
