@@ -13,6 +13,10 @@ title: Jumpstarter
   Download <i class="fab fa-github ms-2 "></i>
 </a>
 
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://docs.jumpstarter.dev">
+  Documentation <i class="fas fa-book ms-2"></i>
+</a>
+
 <p class="lead mt-5"><h2>Enabling Cloud Native Hardware in the Loop for Edge devices &mdash; in the datacenter, lab and development environment!</h2></p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}

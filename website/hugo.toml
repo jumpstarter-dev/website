@@ -149,7 +149,7 @@ sidebar_menu_compact = false
 sidebar_search_disable = false
 
 # Enable the light/dark mode menu in the top navbar.
-showLightDarkModeMenu = true
+showLightDarkModeMenu = false
 footer_about_enable = true
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
@@ -167,6 +167,13 @@ no = 'Sorry to hear that. Please <a href="https://github.com/jumpstarter-dev/jum
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
+
+[[menu.main]]
+    name = "Documentation"
+    weight = 50
+    url = "https://docs.jumpstarter.dev"
+
+
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
