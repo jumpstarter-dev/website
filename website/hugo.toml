@@ -13,6 +13,11 @@ enableRobotsTXT = true
 # Will give values to .Lastmod etc.
 enableGitInfo = true
 
+[[menu.main]]
+    name = "Documentation"
+    weight = 50
+    url = "https://docs.jumpstarter.dev"
+
 # Comment out to enable taxonomies in Docsy
 # disableKinds = ["taxonomy", "taxonomyTerm"]
 
@@ -148,8 +153,8 @@ sidebar_menu_compact = false
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
 sidebar_search_disable = false
 
-# Enable the light/dark mode menu in the top navbar.
-showLightDarkModeMenu = true
+# Disable the light/dark mode menu in the top navbar.
+showLightDarkModeMenu = false
 footer_about_enable = true
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
